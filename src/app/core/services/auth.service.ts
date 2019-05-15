@@ -10,14 +10,15 @@ export class AuthService {
 
   resource = 'auth';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  signUp(formValues: {username: string, password: string}): Observable<User> {
+  signUp(formValues: { username: string, password: string }): Observable<User> {
     const url = `${environment.api.url}/${this.resource}/register`;
     return this.http.post<User>(url, formValues);
   }
 
-  logIn(formValues: {username: string, password: string}): Observable<any> {
+  logIn(formValues: { username: string, password: string }): Observable<any> {
     const url = `${environment.api.url}/${this.resource}/login`;
     return this.http.post<User>(url, formValues);
   }

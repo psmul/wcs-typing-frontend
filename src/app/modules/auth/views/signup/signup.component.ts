@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if(this.signupForm.valid) {
+    if (this.signupForm.valid) {
       const formValues = this.signupForm.getRawValue();
 
       const payload = {

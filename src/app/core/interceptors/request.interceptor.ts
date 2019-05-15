@@ -9,7 +9,8 @@ import {tap} from 'rxjs/operators';
 export class RequestInterceptor implements HttpInterceptor {
   requestCount: number = 0;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     ++this.requestCount;
@@ -35,7 +36,6 @@ export class RequestInterceptor implements HttpInterceptor {
           }
         },
       )
-
     );
   }
 

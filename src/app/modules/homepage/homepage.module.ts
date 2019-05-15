@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomepageComponent } from './views/homepage/homepage.component';
-import { HomepageRoutingModule } from './homepage-routing.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HomepageComponent} from './views/homepage/homepage.component';
+import {HomepageRoutingModule} from './homepage-routing.module';
 
 @NgModule({
   declarations: [HomepageComponent],
@@ -10,4 +10,5 @@ import { HomepageRoutingModule } from './homepage-routing.module';
     HomepageRoutingModule
   ]
 })
-export class HomepageModule { }
+export class HomepageModule {
+}

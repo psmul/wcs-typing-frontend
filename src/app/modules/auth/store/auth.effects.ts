@@ -1,24 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
-import {map, tap, switchMap} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {Actions, Effect, ofType} from '@ngrx/effects';
+import {Observable, of} from 'rxjs';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {AuthService} from '../../../core/services/auth.service';
-import {AuthActionTypes, SignUp, SignUpFailure, SignUpSuccess, LogIn, LogInSuccess, LogInFailure} from './auth.actions';
+import {AuthActionTypes, LogIn, LogInFailure, LogInSuccess, SignUp, SignUpFailure, SignUpSuccess} from './auth.actions';
 import {catchError} from 'rxjs/internal/operators/catchError';
-
 
 
 @Injectable()
 export class AuthEffects {
-
-  constructor(
-    private actions: Actions,
-    private authService: AuthService,
-    private router: Router,
-  ) {}
-
 
   @Effect()
   SignUp: Observable<any> = this.actions.pipe(
@@ -32,12 +23,11 @@ export class AuthEffects {
         }),
         catchError((error) => {
           console.log(error);
-          return of(new SignUpFailure({ error }));
+          return of(new SignUpFailure({error}));
         })
       );
     })
   );
-
   @Effect()
   LogIn: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN),
@@ -50,13 +40,12 @@ export class AuthEffects {
         }),
         catchError((error) => {
           console.log(error);
-          return of(new LogInFailure({ error }));
+          return of(new LogInFailure({error}));
         })
       );
     })
   );
-
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   LogInSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
@@ -64,17 +53,22 @@ export class AuthEffects {
       this.router.navigateByUrl('/dashboard');
     })
   );
-
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   LogInFailure: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_FAILURE)
   );
-
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   LogOut: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       this.authService.removeAuthToken();
     })
   );
+
+  constructor(
+    private actions: Actions,
+    private authService: AuthService,
+    private router: Router,
+  ) {
+  }
 }
