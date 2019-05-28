@@ -57,7 +57,7 @@ export class LogOut implements Action {
   readonly type = AuthActionTypes.LOGOUT;
 }
 
-export type All =
+export type AuthActionsAll =
   | SignUp
   | SignUpSuccess
   | SignUpFailure

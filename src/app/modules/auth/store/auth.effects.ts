@@ -28,6 +28,7 @@ export class AuthEffects {
       );
     })
   );
+
   @Effect()
   LogIn: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN),
@@ -45,6 +46,7 @@ export class AuthEffects {
       );
     })
   );
+
   @Effect({dispatch: false})
   LogInSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
@@ -53,10 +55,12 @@ export class AuthEffects {
       this.router.navigateByUrl('/dashboard');
     })
   );
+
   @Effect({dispatch: false})
   LogInFailure: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_FAILURE)
   );
+
   @Effect({dispatch: false})
   LogOut: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGOUT),

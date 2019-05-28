@@ -4,9 +4,9 @@
     <hr>
     <br>
 
-    <div *ngIf="errorMessage">
+    <div *ngIf="authErrorMessage$ | async as authErrorMessage">
       <div class="alert alert-danger" role="alert">
-        {{errorMessage}}
+        {{ authErrorMessage }}
       </div>
     </div>
 

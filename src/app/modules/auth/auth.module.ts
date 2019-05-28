@@ -7,8 +7,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './store/auth.effects';
 import {StoreModule} from '@ngrx/store';
-import * as auth from './store/auth.reducers';
 import {AuthService} from '../../core/services/auth.service';
+import {authReducer} from './store/auth.reducers';
+import {AuthFacadeService} from './store/auth-facade.service';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -18,10 +19,11 @@ import {AuthService} from '../../core/services/auth.service';
     FormsModule,
     ReactiveFormsModule,
     EffectsModule.forFeature([AuthEffects]),
-    StoreModule.forFeature('auth', auth.reducer)
+    StoreModule.forFeature('auth', authReducer)
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthFacadeService
   ]
 })
 export class AuthModule {

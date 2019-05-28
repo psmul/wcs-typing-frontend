@@ -1,20 +1,10 @@
-import {User} from '../../../core/models/local/User';
-import {All, AuthActionTypes} from './auth.actions';
+import {AuthActionsAll, AuthActionTypes} from './auth.actions';
+import {AuthState, initialState} from './auth.state';
 
 
-export interface State {
-  isAuthenticated: boolean;
-  user: User | null;
-  errorMessage: string | null;
-}
 
-export const initialState: State = {
-  isAuthenticated: false,
-  user: null,
-  errorMessage: null
-};
 
-export function reducer(state = initialState, action: All): State {
+export function authReducerFn(state = initialState, action: AuthActionsAll): AuthState {
   switch (action.type) {
     case AuthActionTypes.SIGNUP_SUCCESS: {
       return {
@@ -27,12 +17,14 @@ export function reducer(state = initialState, action: All): State {
         errorMessage: null
       };
     }
+
     case AuthActionTypes.SIGNUP_FAILURE: {
       return {
         ...state,
-        errorMessage: action.payload.error.error.message
+        errorMessage: action.payload.error.error.message || action.payload.error.message
       };
     }
+
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
@@ -44,17 +36,24 @@ export function reducer(state = initialState, action: All): State {
         errorMessage: null
       };
     }
+
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
         errorMessage: action.payload.error.error.message
       };
     }
+
     case AuthActionTypes.LOGOUT: {
       return initialState;
     }
+
     default: {
       return state;
     }
   }
+}
+
+export function authReducer(state = initialState, action: AuthActionsAll): AuthState {
+  return authReducerFn(state, action);
 }
